@@ -2,7 +2,6 @@
 
 import subprocess
 import os
-#import plistlib
 import sys
 import json
 import time

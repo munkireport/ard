@@ -21,12 +21,19 @@ class ArdRewriteColumns extends Migration
             $table->mediumText('administrators')->nullable();
             $table->mediumText('task_servers')->nullable();
             
+            // Create indexes
             $table->index('console_allows_remote');
             $table->index('load_menu_extra');
             $table->index('screensharing_request_permission');
             $table->index('vnc_enabled');
             $table->index('allow_all_local_users');
             $table->index('directory_login');
+            
+            // Change existing columns
+            $table->string('text1')->nullable()->change();
+            $table->string('text2')->nullable()->change();
+            $table->string('text3')->nullable()->change();
+            $table->string('text4')->nullable()->change();
         });
     }
     
