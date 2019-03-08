@@ -4,6 +4,7 @@
 new Machine_model;
 new Reportdata_model;
 new Ard_model;
+new Security_model;
 ?>
 
 <div class="container">
@@ -25,6 +26,7 @@ new Ard_model;
 		        <th data-i18n="ard.listing.text" data-i18n-options='{"number":3}' data-colname='ard.text3'></th>
 		        <th data-i18n="ard.listing.text" data-i18n-options='{"number":4}' data-colname='ard.text4'></th>
 		        <th data-i18n="ard.admin_machines" data-colname='ard.admin_machines'></th>
+		        <th data-i18n="security.ard_users" data-colname='security.ard_users'></th>
 		        <th data-i18n="ard.vnc_enabled" data-colname='ard.vnc_enabled'></th>
 		        <th data-i18n="ard.directory_login" data-colname='ard.directory_login'></th>
 		        <th data-i18n="ard.allow_all_local_users" data-colname='ard.allow_all_local_users'></th>
@@ -34,7 +36,7 @@ new Ard_model;
 		    </thead>
 		    <tbody>
 		    	<tr>
-					<td data-i18n="listing.loading" colspan="13" class="dataTables_empty"></td>
+					<td data-i18n="listing.loading" colspan="14" class="dataTables_empty"></td>
 				</tr>
 		    </tbody>
 		  </table>
@@ -76,30 +78,30 @@ new Ard_model;
 	        	var link = mr.getClientDetailLink(name, sn, '#tab_ard');
 	        	$('td:eq(0)', nRow).html(link);
                 
-                var colvar=$('td:eq(8)', nRow).html();
-	        	colvar = colvar == '1' ? i18n.t('yes') :
-	        	(colvar === '0' ? i18n.t('no') : '')
-	        	$('td:eq(8)', nRow).html(colvar)
-                
-                var colvar=$('td:eq(9)', nRow).html();
+	        	var colvar=$('td:eq(9)', nRow).html();
 	        	colvar = colvar == '1' ? i18n.t('yes') :
 	        	(colvar === '0' ? i18n.t('no') : '')
 	        	$('td:eq(9)', nRow).html(colvar)
                 
-                var colvar=$('td:eq(10)', nRow).html();
+	        	var colvar=$('td:eq(10)', nRow).html();
 	        	colvar = colvar == '1' ? i18n.t('yes') :
 	        	(colvar === '0' ? i18n.t('no') : '')
 	        	$('td:eq(10)', nRow).html(colvar)
                 
-                var colvar=$('td:eq(11)', nRow).html();
+	        	var colvar=$('td:eq(11)', nRow).html();
 	        	colvar = colvar == '1' ? i18n.t('yes') :
 	        	(colvar === '0' ? i18n.t('no') : '')
 	        	$('td:eq(11)', nRow).html(colvar)
                 
-                var colvar=$('td:eq(12)', nRow).html();
+	        	var colvar=$('td:eq(12)', nRow).html();
 	        	colvar = colvar == '1' ? i18n.t('yes') :
 	        	(colvar === '0' ? i18n.t('no') : '')
 	        	$('td:eq(12)', nRow).html(colvar)
+                
+	        	var colvar=$('td:eq(13)', nRow).html();
+	        	colvar = colvar == '1' ? i18n.t('yes') :
+	        	(colvar === '0' ? i18n.t('no') : '')
+	        	$('td:eq(13)', nRow).html(colvar)
 	        }
 	    });
 	});
