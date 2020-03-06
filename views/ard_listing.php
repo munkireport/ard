@@ -1,20 +1,9 @@
 <?php $this->view('partials/head'); ?>
 
-<?php //Initialize models needed for the table
-new Machine_model;
-new Reportdata_model;
-new Ard_model;
-new Security_model;
-?>
-
 <div class="container">
-
   <div class="row">
-
   	<div class="col-lg-12">
-
 		  <h3><span data-i18n="ard.listing.title"></span> <span id="total-count" class='label label-primary'>…</span></h3>
-
 		  <table class="table table-striped table-condensed table-bordered">
 		    <thead>
 		      <tr>
@@ -59,7 +48,7 @@ new Security_model;
 		var columnDefs = [],
             col = 0; // Column counter
 		$('.table th').map(function(){
-              columnDefs.push({name: $(this).data('colname'), targets: col});
+              columnDefs.push({name: $(this).data('colname'), targets: col, render: $.fn.dataTable.render.text()});
               col++;
 		});
 	    oTable = $('.table').dataTable( {
