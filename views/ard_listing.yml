@@ -1,0 +1,42 @@
+
+i18n_title: ard.listing.title
+table:
+  - column: machine.computer_name
+    i18n_header: listing.computername
+    formatter: clientDetail
+    tab_link: ard-tab
+  - column: reportdata.serial_number
+    i18n_header: serial
+  - column: reportdata.long_username
+    i18n_header: username
+  - column: ard.text1
+    i18n_header: ard.listing.text
+    i18n-options: '{"number":1}'
+  - column: ard.text2
+    i18n_header: ard.listing.text
+    i18n-options: '{"number":2}'
+  - column: ard.text3
+    i18n_header: ard.listing.text
+    i18n-options: '{"number":3}'
+  - column: ard.text4
+    i18n_header: ard.listing.text
+    i18n-options: '{"number":4}'
+  - column: ard.admin_machines
+    i18n_header: ard.admin_machines
+  - column: security.ard_users
+    i18n_header: security.ard_users
+  - column: ard.vnc_enabled
+    i18n_header: ard.vnc_enabled
+    formatter: binaryYesNo
+  - column: ard.directory_login
+    i18n_header: ard.directory_login
+    formatter: binaryYesNo
+  - column: ard.allow_all_local_users
+    i18n_header: ard.allow_all_local_users
+    formatter: binaryYesNo
+  - column: ard.screensharing_request_permission
+    i18n_header: ard.screensharing_request_permission
+    formatter: binaryYesNo
+  - column: ard.load_menu_extra
+    i18n_header: ard.load_menu_extra
+    formatter: binaryYesNo
