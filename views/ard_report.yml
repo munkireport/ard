@@ -1,0 +1,8 @@
+row1:
+  ard_remote_control_enabled:
+  ard_directory_login:
+  ard_allow_all_local_users:
+row2:
+  ard_vnc_enabled:
+  ard_screensharing_request_permission:
+  ard_load_menu_extra: 

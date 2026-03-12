@@ -1,0 +1,16 @@
+type: button
+widget_id: ard-directory-login-widget
+api_url: /module/ard/get_directory_login
+i18n_title: ard.directory_login
+icon: fa-sitemap
+listing_link: /show/listing/ard/ard
+badge: ard-directory-login-cnt
+buttons:
+  - label: no
+    i18n_label: no
+    class: btn-danger
+    search_component: directory_no
+  - label: yes
+    i18n_label: yes
+    class: btn-success
+    search_component: directory_yes 

@@ -1,0 +1,16 @@
+type: button
+widget_id: ard-screensharing-request-permission-widget
+api_url: /module/ard/get_screensharing_request_permission
+i18n_title: ard.screensharing_request_permission
+icon: fa-share-alt
+listing_link: /show/listing/ard/ard
+badge: ard-screensharing-request-permission-cnt
+buttons:
+  - label: no
+    i18n_label: no
+    class: btn-success
+    search_component: screensharing_no
+  - label: yes
+    i18n_label: yes
+    class: btn-danger
+    search_component: screensharing_yes 

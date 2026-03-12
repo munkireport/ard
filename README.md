@@ -3,7 +3,6 @@ ARD module
 
 Reports information Apple Remote Desktop and it's configuration
 
-
 Table Schema
 ---
 

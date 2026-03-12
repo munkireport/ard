@@ -1,0 +1,16 @@
+type: button
+widget_id: ard-remote-control-enabled-widget
+api_url: /module/ard/get_console_allows_remote
+i18n_title: ard.remote_control_enabled
+icon: fa-desktop
+listing_link: /show/listing/ard/ard
+badge: ard-remote-control-enabled-cnt
+buttons:
+  - label: no
+    i18n_label: no
+    class: btn-success
+    search_component: console_remote_no
+  - label: yes
+    i18n_label: yes
+    class: btn-danger
+    search_component: console_remote_yes 

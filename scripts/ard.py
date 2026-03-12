@@ -31,7 +31,36 @@ def get_remote_management_info():
     try:
         ard_info = {'vnc_enabled':0,'screensharing_request_permission':0,'console_allows_remote':0,'directory_login':0,'load_menu_extra':1}
         
+        # Check multiple possible locations for AdminConsoleAllowsRemoteControl
         console_allows_remote = to_bool(get_pref_value('AdminConsoleAllowsRemoteControl', 'com.apple.RemoteManagement'))
+        
+        # If the preference doesn't exist, check if ARDAgent is running
+        if console_allows_remote == "":
+            try:
+                # Check for running ARDAgent process
+                cmd = ['/bin/ps', '-ef']
+                proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                ps_out, ps_err = proc.communicate()
+                
+                # If ARDAgent is running (but not grep ARDAgent), consider console_allows_remote as enabled
+                if b'ARDAgent' in ps_out and not b'grep ARDAgent' in ps_out:
+                    console_allows_remote = 1
+                else:
+                    # Try alternative sources for backward compatibility
+                    try:
+                        # Check if Screen Sharing is enabled (which often implies console access)
+                        cmd = ['/usr/bin/defaults', 'read', '/Library/Preferences/com.apple.ScreenSharing', 'enabled']
+                        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                        ss_out, ss_err = proc.communicate()
+                        if ss_out.strip() == b'1':
+                            console_allows_remote = 1
+                    except:
+                        # Try one more alternative from ARDAgent
+                        console_allows_remote = to_bool(get_pref_value('allowAccessFor', 'com.apple.RemoteDesktop'))
+            except:
+                # If all checks fail, default to 0 (not enabled)
+                console_allows_remote = 0
+                
         if (console_allows_remote == ""):
             ard_info['console_allows_remote'] = 0
         else:

@@ -1,0 +1,16 @@
+type: button
+widget_id: ard-vnc-enabled-widget
+api_url: /module/ard/get_vnc_enabled
+i18n_title: ard.vnc_enabled
+icon: fa-desktop
+listing_link: /show/listing/ard/ard
+badge: ard-vnc-enabled-cnt
+buttons:
+  - label: no
+    i18n_label: disabled
+    class: btn-danger
+    search_component: vnc_no
+  - label: yes
+    i18n_label: enabled
+    class: btn-success
+    search_component: vnc_yes 

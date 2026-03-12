@@ -1,0 +1,16 @@
+type: button
+widget_id: ard-allow-all-local-users-widget
+api_url: /module/ard/get_allow_all_local_users
+i18n_title: ard.allow_all_local_users
+icon: fa-users
+listing_link: /show/listing/ard/ard
+badge: ard-allow-all-local-users-cnt
+buttons:
+  - label: no
+    i18n_label: no
+    class: btn-success
+    search_component: local_users_no
+  - label: yes
+    i18n_label: yes
+    class: btn-danger
+    search_component: local_users_yes 

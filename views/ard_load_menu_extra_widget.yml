@@ -1,0 +1,16 @@
+type: button
+widget_id: ard-load-menu-extra-widget
+api_url: /module/ard/get_load_menu_extra
+i18n_title: ard.load_menu_extra
+icon: fa-bars
+listing_link: /show/listing/ard/ard
+badge: ard-load-menu-extra-cnt
+buttons:
+  - label: no
+    i18n_label: no
+    class: btn-danger
+    search_component: menu_extra_no
+  - label: yes
+    i18n_label: yes
+    class: btn-success
+    search_component: menu_extra_yes 

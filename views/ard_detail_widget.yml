@@ -2,4 +2,4 @@ type: table
 id: ard-data
 icon: apple
 i18n_title: ard.ard
-js_link: module/ard/js/ard
+badge: ard-directory-login-cnt

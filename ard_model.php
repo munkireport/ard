@@ -29,28 +29,4 @@ class Ard_model extends \Model
         
         $this->serial_number = $serial;
     }
-
-    public function process($data)
-    {
-        $parser = new CFPropertyList();
-        $parser->parse($data);
-        $plist = $parser->toArray();
-
-        foreach (array('text1', 'text2', 'text3', 'text4', 'console_allows_remote', 'load_menu_extra', 'screensharing_request_permission', 'vnc_enabled', 'allow_all_local_users', 'directory_login', 'admin_machines', 'administrators', 'task_servers') as $item) {
-            // If key exists and is zero, set it to zero
-            if ( array_key_exists($item, $plist) && $plist[$item] === 0) {
-                $this->$item = 0;
-            // Else if key does not exist in $plist, null it
-            } else if (! array_key_exists($item, $plist) || $plist[$item] == '' || $plist[$item] == "{}") {
-                $this->$item = null;
-
-            // Set the db fields to be the same as those in the preference file
-            } else {
-                $this->$item = $plist[$item];
-            }
-        }
-        
-        // Save the data. Just like Lassie saved Timmy
-        $this->save();
-    }
 }
