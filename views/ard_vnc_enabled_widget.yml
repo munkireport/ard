@@ -2,7 +2,7 @@ type: button
 widget_id: ard-vnc-enabled-widget
 api_url: /module/ard/get_vnc_enabled
 i18n_title: ard.vnc_enabled
-icon: fa-desktop
+icon: fa-eye
 listing_link: /show/listing/ard/ard
 badge: ard-vnc-enabled-cnt
 buttons:

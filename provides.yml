@@ -32,13 +32,3 @@ reports:
 detail_widgets:
     ard:
         view: ard_detail_widget
-
-# Module unique name
-slug: ard
-
-# Admin (1) or user (0) module
-admin: 0
-
-# Modules that this module is dependent on
-dependencies:
-    - reportdata 

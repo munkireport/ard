@@ -6,7 +6,6 @@ import sys
 import json
 import time
 
-sys.path.insert(0, '/usr/local/munki')
 sys.path.insert(0, '/usr/local/munkireport')
 
 from munkilib import FoundationPlist
@@ -20,20 +19,20 @@ def get_remote_desktop_info():
         ard_info['text2'] = get_pref_value('Text2', 'com.apple.RemoteDesktop')
         ard_info['text3'] = get_pref_value('Text3', 'com.apple.RemoteDesktop')
         ard_info['text4'] = get_pref_value('Text4', 'com.apple.RemoteDesktop')
-        
+
         return ard_info
 
     except Exception:
         return {}
-    
+
 def get_remote_management_info():
 
     try:
         ard_info = {'vnc_enabled':0,'screensharing_request_permission':0,'console_allows_remote':0,'directory_login':0,'load_menu_extra':1}
-        
+
         # Check multiple possible locations for AdminConsoleAllowsRemoteControl
         console_allows_remote = to_bool(get_pref_value('AdminConsoleAllowsRemoteControl', 'com.apple.RemoteManagement'))
-        
+
         # If the preference doesn't exist, check if ARDAgent is running
         if console_allows_remote == "":
             try:
@@ -41,18 +40,14 @@ def get_remote_management_info():
                 cmd = ['/bin/ps', '-ef']
                 proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 ps_out, ps_err = proc.communicate()
-                
+
                 # If ARDAgent is running (but not grep ARDAgent), consider console_allows_remote as enabled
                 if b'ARDAgent' in ps_out and not b'grep ARDAgent' in ps_out:
                     console_allows_remote = 1
                 else:
                     # Try alternative sources for backward compatibility
                     try:
-                        # Check if Screen Sharing is enabled (which often implies console access)
-                        cmd = ['/usr/bin/defaults', 'read', '/Library/Preferences/com.apple.ScreenSharing', 'enabled']
-                        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                        ss_out, ss_err = proc.communicate()
-                        if ss_out.strip() == b'1':
+                        if get_pref_value('enabled', 'com.apple.ScreenSharing'):
                             console_allows_remote = 1
                     except:
                         # Try one more alternative from ARDAgent
@@ -60,58 +55,58 @@ def get_remote_management_info():
             except:
                 # If all checks fail, default to 0 (not enabled)
                 console_allows_remote = 0
-                
+
         if (console_allows_remote == ""):
             ard_info['console_allows_remote'] = 0
         else:
             ard_info['console_allows_remote'] = console_allows_remote
-            
+
         load_menu_extra = to_bool(get_pref_value('LoadRemoteManagementMenuExtra', 'com.apple.RemoteManagement'))
         if (load_menu_extra == ""):
             ard_info['load_menu_extra'] = 1
         else:
             ard_info['load_menu_extra'] = load_menu_extra
-            
+
         directory_login = to_bool(get_pref_value('DirectoryGroupLoginsEnabled', 'com.apple.RemoteManagement'))
         if (directory_login == ""):
             ard_info['directory_login'] = 0
         else:
             ard_info['directory_login'] = directory_login
-            
+
         screensharing_request_permission = to_bool(get_pref_value('ScreenSharingReqPermEnabled', 'com.apple.RemoteManagement'))
         if (screensharing_request_permission == ""):
             ard_info['screensharing_request_permission'] = 0
         else:
             ard_info['screensharing_request_permission'] = screensharing_request_permission
-            
+
         vnc_enabled = to_bool(get_pref_value('VNCLegacyConnectionsEnabled', 'com.apple.RemoteManagement'))
         if (vnc_enabled == ""):
             ard_info['vnc_enabled'] = 0
         else:
             ard_info['vnc_enabled'] = vnc_enabled
-            
+
         allow_all_local_users = to_bool(get_pref_value('ARD_AllLocalUsers', 'com.apple.RemoteManagement'))
         if (allow_all_local_users == ""):
             ard_info['allow_all_local_users'] = 0
         else:
             ard_info['allow_all_local_users'] = allow_all_local_users
-        
+
         return ard_info
 
     except Exception:
         return {}
-    
+
 def get_ard_info():
 
     try:
         plist = FoundationPlist.readPlist("/Library/Preferences/com.apple.ARDAgent.plist")
         out = {}
-        
+
         for item in plist:
             if item == 'Administrators':
                 admin_json = []
                 admin_machines = []
-                
+
                 for mac_address_entry in str(plist[item]).split("    };"):
                     machine_entry = {}
                     for mac_address in mac_address_entry.split('\n'):
@@ -138,7 +133,7 @@ def get_ard_info():
                     out['admin_machines'] = ', '.join(admin_machines)
                 except Exception:
                     pass
-                
+
             elif item == 'TaskServers':
                 task_json = []
                 for mac_address_entry in str(plist[item]).split("    };"):
@@ -155,25 +150,25 @@ def get_ard_info():
 
                     task_json.append(task_entry)
                 out['task_servers'] = json.dumps(task_json[:-1])
-            
+
         return out
 
     except Exception:
         return {}
-    
+
 def get_pref_value(key, domain):
-    
+
     value = CFPreferencesCopyAppValue(key, domain)
-    
+
     if(value is not None):
         return value
     elif(value is not None and len(value) == 0 ):
         return ""
     else:
         return ""
-    
+
 def string_to_time(date_time):
-    
+
     if (date_time == "0" or date_time == 0):
         return ""
     else:
@@ -184,7 +179,7 @@ def string_to_time(date_time):
                 return str(int(time.mktime(time.strptime(str(date_time).replace(" +0000", ""), '%Y-%m-%dT%H:%M:%SZ'))))
             except Exception:
                 return date_time
-    
+
 def to_bool(s):
     if s == "":
         return ""
@@ -192,15 +187,15 @@ def to_bool(s):
         return 1
     else:
         return 0
-    
+
 def merge_two_dicts(x, y):
     z = x.copy()
     z.update(y)
     return z
-    
+
 def main():
     """Main"""
-        
+
     # Remove old init_ard script, if it exists
     if os.path.isfile(os.path.dirname(os.path.realpath(__file__))+'/init_ard'):
         os.remove(os.path.dirname(os.path.realpath(__file__))+'/init_ard')
@@ -209,7 +204,7 @@ def main():
     result = dict()
     result = merge_two_dicts(get_remote_desktop_info(), get_remote_management_info())
     result = merge_two_dicts(result, get_ard_info())
-    
+
     # Write ard results to cache
     cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
     output_plist = os.path.join(cachedir, 'ard.plist')

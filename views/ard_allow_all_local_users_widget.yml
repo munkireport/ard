@@ -8,9 +8,9 @@ badge: ard-allow-all-local-users-cnt
 buttons:
   - label: no
     i18n_label: no
-    class: btn-success
+    class: btn-danger
     search_component: local_users_no
   - label: yes
     i18n_label: yes
-    class: btn-danger
+    class: btn-success
     search_component: local_users_yes 

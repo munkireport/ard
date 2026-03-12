@@ -27,25 +27,25 @@ table:
     i18n_header: security.ard_users
   - column: ard.vnc_enabled
     i18n_header: ard.vnc_enabled
-    formatter: formatArdBinary
+    formatter: formatArdBinaryInverted
     filter: vnc_enabled_filter
   - column: ard.console_allows_remote
     i18n_header: ard.remote_control_enabled
-    formatter: formatArdBinary
+    formatter: formatArdBinaryInverted
     filter: console_allows_remote_filter
   - column: ard.directory_login
     i18n_header: ard.directory_login
-    formatter: formatArdBinary
+    formatter: formatArdBinaryInverted
     filter: directory_login_filter
   - column: ard.allow_all_local_users
     i18n_header: ard.allow_all_local_users
-    formatter: formatArdBinary
+    formatter: formatArdBinaryInverted
     filter: allow_all_local_users_filter
   - column: ard.screensharing_request_permission
     i18n_header: ard.screensharing_request_permission
-    formatter: formatArdBinary
+    formatter: formatArdBinaryInverted
     filter: screensharing_request_permission_filter
   - column: ard.load_menu_extra
     i18n_header: ard.load_menu_extra
-    formatter: binaryYesNo
+    formatter: formatArdBinaryInverted
     filter: load_menu_extra_filter

@@ -8,9 +8,9 @@ badge: ard-remote-control-enabled-cnt
 buttons:
   - label: no
     i18n_label: no
-    class: btn-success
+    class: btn-danger
     search_component: console_remote_no
   - label: yes
     i18n_label: yes
-    class: btn-danger
+    class: btn-success
     search_component: console_remote_yes 
